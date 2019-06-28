@@ -229,7 +229,7 @@ local function CreateSpellFrames()
 end
 
 local function AddSpellEntry()
-    table.insert(NeatFilterSettings[PlayerClass],  {enabled = true, spellId = {0}, size = 32, unitId = "player", isMine = true, filter = "HARMFUL", setPoint = {"CENTER", "UIParent", "CENTER", 0, 0}})
+    table.insert(NeatFilterSettings[PlayerClass],  {enabled = true, spellId = {0}, size = 32, unitId = "player", isMine = true, filter = "HARMFUL", setPoint = {"TOPLEFT", "UIParent", "CENTER", 0, 0}})
     CreateSpellFrames()
     UpdateEditMode()
     NeatFilter.OpenSettings(StoredFrames[#StoredFrames])
