@@ -1,4 +1,4 @@
-## Interface: 80100
+## Interface: 90001
 ## Title: |r|cFFFF8C00NeatFilter|r
 ## Notes: Filter useful buffs and debuffs
 ## Author: Luxocracy, Nils Ruesch, Danpiel

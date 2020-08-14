@@ -1,4 +1,8 @@
 local font = "Fonts\\FRIZQT__.ttf"
+local wowversion, wowbuild, wowdate, wowtocversion = GetBuildInfo()
+if wowtocversion and wowtocversion > 90000 then
+	NeatFilterBackdrop = "BackdropTemplate"
+end
 
 local function ToggleEditMode(self)
   -- Backwards because we haven't yet changed the option
@@ -7,7 +11,7 @@ local function ToggleEditMode(self)
     if NeatFilterInterfacePanel.SpellRow.visible then NeatFilter.UpdateSpellEntry(NeatFilterInterfacePanel.SpellRow) end -- Store upon exiting Config Mode
   else
     self:SetText("Disable Config Mode")
-    print("|cFFFF6906NeatFilter: |cFF3782D1Config Mode Enabled(|cFFFFFFFFLeft-Click|cFF3782D1 to edit, hold to move frame. |cFFFFFFFFRight-Click|cFF3782D1 to |cFFFFFFFFEnable/Disable|cFF3782D1 Aura. Hold down |cFFFFFFFFShift|cFF3782D1 or |cFFFFFFFFAlt|cFF3782D1 and |cFFFFFFFFRLeft-Click|cFF3782D1 to reset to previous position.)")
+    print("|cFFFF6906NeatFilter: |cFF3782D1Config Mode Enabled(|cFFFFFFFFLeft-Click|cFF3782D1 to edit, hold to move frame. |cFFFFFFFFRight-Click|cFF3782D1 to |cFFFFFFFFEnable/Disable|cFF3782D1 Aura. Hold down |cFFFFFFFFShift|cFF3782D1 or |cFFFFFFFFAlt|cFF3782D1 and |cFFFFFFFFLeft-Click|cFF3782D1 to reset to previous position.)")
   end
   NeatFilter.settings.configmode = not NeatFilter.settings.configmode
   NeatFilter.UpdateEditMode()
@@ -15,8 +19,8 @@ local function ToggleEditMode(self)
 end
 
 -- Frame Creation Utility
-local function CreatePanelFrame(reference, listname, title)
-  local panelframe = CreateFrame( "Frame", reference, UIParent);
+local function CreatePanelFrame(reference, listname, title, backdrop)
+  local panelframe = CreateFrame( "Frame", reference, UIParent, backdrop);
   panelframe.name = listname
   panelframe.Label = panelframe:CreateFontString(nil, 'ARTWORK', 'GameFontNormalLarge')
   panelframe.Label:SetPoint("TOPLEFT", panelframe, "TOPLEFT", 16, -16)
@@ -253,7 +257,7 @@ local function AddSpellRow(data, index)
 end
 
 -- Create Interface Panel
-local NeatFilterInterfacePanel = CreatePanelFrame("NeatFilterInterfacePanel", "NeatFilter", nil)
+local NeatFilterInterfacePanel = CreatePanelFrame("NeatFilterInterfacePanel", "NeatFilter", nil, NeatFilterBackdrop)
 --InterfaceOptions_AddCategory(NeatFilterInterfacePanel)
 
 BuildInterfacePanel(NeatFilterInterfacePanel)
